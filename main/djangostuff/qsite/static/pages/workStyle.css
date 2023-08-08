@@ -1,0 +1,98 @@
+html,
+body{
+    margin: 0;
+    padding: 500;
+    font-family: 'Roboto Mono', monospace;
+    background: #e7e7e7;
+    
+}
+a{
+  list-style: none;
+  text-decoration: none;
+  color: black;
+}
+.menu-btn{
+  position: fixed;
+  top: 0px;
+  right: 0;
+  font-size: 3.2em;
+  padding: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.container .gallery
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: left;
+  text-align: center;
+  
+}
+
+ .container .gallery img {
+  float: left;
+  max-width: 500em;
+  height: auto;
+  object-fit: cover;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.container .gallery img:hover {
+  transform: scale(1.1);
+  z-index: 5;
+}
+
+.container .gallery__image {
+  width: calc(50% - 10px);
+  height: calc(33.33% - 10px);
+  object-fit: cover;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+/* popup on click */
+.container .popup-image
+{
+  position: fixed;
+  top:0; left:0;
+  background: rgba(0, 0, 0, .9);
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  display: none;
+}
+
+.container .popup-image span
+{
+  position: absolute;
+  top: 0; right: 10px;
+  font-size: 40px;
+  font-weight: bolder;
+  color: #fff;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.container .popup-image img
+{
+  position: absolute;
+  top: 50%; left:50%;
+  transform: translate(-50%, -50%);
+  height: 150%;
+  width: auto;
+  border-radius: 5px;
+  width: 1250px;
+  object-fit: contain;
+}
+
+@media (max-width:768px)
+{
+  .container .popup-image img
+  {
+    width:95%;
+  }
+}
+  

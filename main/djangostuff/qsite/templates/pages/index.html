@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <title>Q's Website</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'pages/style.css' %}" href="">
+    <script defer src="{% static 'pages/contact.js' %}"></script>
+    <script defer src="{% static 'pages/dragimage.js'%}"></script>
+    <script defer src="{% static 'pages/randPos.js'%}"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script type="text/javascript">
+        var user = '{{request.user}}'
+    </script>
+
+</head>
+<body>
+    <div class="wrapper">
+        <img src="{% static 'pages/images/Q logo PNG.png' %}" class="q-logo">
+        <div class="menu-btn">menu</div>
+        <div class="menu-container">
+            <div class="items-section">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="{%url 'work' %}">Work</a></li>
+                    <li><a href="{%url 'shop' %}">Shop</a></li>
+                    <li><a href="{%url 'about' %}">About</a></li>
+                    <li><a data-contact-target="#contact" id="contact-link" href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="contact" id="contact">
+                <div class="contact-header">
+                    <div class="title">Contact</div>
+                    <button data-close-button class="close-button">&times;</button>
+                </div>
+                <div class="contact-body">
+                    <ul>
+                        <li>phone: 555-555-5555</li>
+                        <li>email: email@email.com</li>
+                        <li>insta: @quomni</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="image-container">
+        <img src="{% static 'pages/images/kiddo.png' %}" alt="image" class="draggable-image">
+      </div>
+      <div class="image-container">
+        <img src="{% static 'pages/images/homer.gif' %}" alt="image2" class="draggable-image" id="homer">
+      </div>
+</body>
+</html>

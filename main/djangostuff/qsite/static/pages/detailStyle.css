@@ -1,0 +1,89 @@
+html {
+    font-family: 'Roboto Mono', monospace;
+    background-color: aliceblue;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.cart-button {
+    position: fixed;
+    background-color: rgb(255, 46, 46);
+    color: white;
+    top: 0;
+    right: 12rem;
+    font-size: 2.2em;
+    padding: 0.5em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.menu-btn {
+    position: fixed;
+    top: 0px;
+    right: 0;
+    font-size: 2.9em;
+    padding: 0.5em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+.q-logo {
+    position: fixed;
+    display: inline-block;
+    padding-left: 10px;
+    min-width: 7%; 
+    width: 7%; 
+    height: auto; 
+    left: 50%;
+    transform: translateX(-50%);
+    flex: 1;
+  }
+
+.product-image {
+    border: 1px solid black;
+}
+
+.container {
+    padding-top: 15em;
+}
+
+.product-title {
+    font-size: large;
+}
+
+.details{
+    padding-left: 25em;
+    font-weight: 600;
+}
+
+.wrapper{
+    display: flex;
+    padding-bottom: 45em;
+    padding-left: 50em;
+}
+
+.items{
+    order: 1;
+    padding: 50px;
+}
+
+.product-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #222;
+    color: #fff;
+    border: 1px solid #fff;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.product-button:hover {
+    background-color: rgb(105, 185, 118);
+    cursor: pointer;
+    color: #000;
+}

@@ -1,0 +1,158 @@
+html,
+body{
+    margin: 0;
+    padding: 500;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.q-logo {
+    position: fixed;
+    display: inline-block;
+    padding-left: 10px;
+    min-width: 10%; 
+    width: 10%; 
+    height: auto; 
+    left: 50%;
+    transform: translateX(-50%);
+    flex: 1;
+  }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+li, a{
+    list-style: none;
+    text-decoration: none;
+}
+
+.wrapper{
+    width: 100%;
+    height: 100vh;
+    background: #d0d0e9;
+}
+
+.wrapper a:hover
+{
+    color: aqua;
+    transition: all 0.2s;
+}
+
+.wrapper span:hover
+{
+    color: aqua;
+    transition: 0s;
+}
+
+.menu-btn{
+    position: fixed;
+    top: 0px;
+    right: 0.3em;
+    font-size: 3.2em;
+    padding: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.menu-container {
+    flex: 1;
+    font-size: 1.6em;
+    margin-top: 10em;
+    margin-left: 5em;
+    position: relative;
+    box-sizing: border-box;
+    height: 80vh;
+    width: 10vh;
+    display: inline-block;
+    /* Other styles for your menu container */
+  }
+
+.item-section{
+    height: 50%;
+    transition: 0s;
+    display: flex;
+    align-items: center;
+}
+
+.items-section ul > li a{
+    flex: 1;
+    line-height: 1.1em;
+    transition: all 0.2s;
+    font-size: 5em;
+    font-weight: 100;
+    text-transform: uppercase;
+    color: #151218;
+    
+}
+
+.items-section ul > li a:hover{
+    color: beige;
+    transition: 0ms;
+}
+.contact{
+    position: fixed;
+    top: 55%;
+    left: 33%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 50ms ease-in-out;
+    border: 1px solid black;
+    z-index: 10;
+    background-color: white;
+    width: 500px;
+    max-width: 80%;
+}
+
+.contact.active{
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.contact-header {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+
+.contact-header .close-button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.contact-body {
+    padding: 10px 15px; 
+    max-height: 5em;
+}
+
+.contact-body > ul{
+    padding: 10px 15px; 
+    max-height: 5em;
+}
+
+.draggable-image {
+    width: 500px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+#homer {
+    width: 200px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+.draggable-image:hover{
+    cursor: pointer;
+}

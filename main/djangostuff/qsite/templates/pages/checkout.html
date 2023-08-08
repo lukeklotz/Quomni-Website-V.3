@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+{% load static %}
+{% csrf_token %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'pages/checkoutStyle.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,200;0,500;1,200&display=swap" rel="stylesheet">
+
+    <title>Document</title>
+</head>
+<body>
+  <a href='{% url 'index' %}' class="menu-btn">menu</a>
+  <div class="checkout-wrapper">
+    <div class="shipping-container">
+        <div class="container">
+        <h1>Shipping</h1>
+        <p>Please enter your shipping details.</p>
+        <hr />
+        
+        <form class="form" id="form">
+        <div class="fields">
+          <label class="field">
+            <span class="field__label" for="email">Email</span>
+            <input class="field__input" type="text" id="email" value="email@email.com"/>
+          </label>
+        </div>
+        <div class="fields fields--2">
+          <label class="field">
+            <span class="field__label" for="firstname">First name</span>
+            <input class="field__input" type="text" id="firstname" value="First" />
+          </label>
+          <label class="field">
+            <span class="field__label" for="lastname">Last name</span>
+            <input class="field__input" type="text" id="lastname" value="Last" />
+          </label>
+        </div>
+        <label class="field">
+          <span class="field__label" for="address">Address</span>
+          <input class="field__input" type="text" id="address" />
+        </label>
+        <label class="field">
+          <span class="field__label" for="country">Country</span>
+          <select class="field__input" id="country">
+            <option value=""></option>
+            <option value="unitedstates">United States</option>
+          </select>
+        </label>
+        <div class="fields fields--3">
+          <label class="field">
+            <span class="field__label" for="zipcode">Zip code</span>
+            <input class="field__input" type="text" id="zipcode" />
+          </label>
+          <label class="field">
+            <span class="field__label" for="city">City</span>
+            <input class="field__input" type="text" id="city" />
+          </label>
+          <label class="field">
+            <span class="field__label" for="state">State</span>
+            <input class="field__input" id="state">
+              <option value=""></option>
+            </select>
+          </label>
+        </div>
+        {% csrf_token %}
+        </form>
+        <hr>
+        <button id="form-button" class="form-button">Continue</button>
+      </div>
+      <div class="payment-info hidden" id="payment-info">
+        <a href='{% url 'send_email' %}' class="menu-btn">Complete Transaction</a>
+      </div>
+      </div>
+
+        <a href='{% url 'index' %}' class="menu-btn">menu</a>
+        <h3 class="cart" >Your Cart</h3>
+        <div class="items-container">
+        <div class="nav-bar-wrapper">
+            <div class="nav-bar">
+                <div class="item">item</div>
+                <div class="price">price</div>
+                <div class="quantity">quantity</div>
+                <div class="total">total</div>
+            </div>
+        </div>
+    
+        {% for item in items %}
+        <div class="items-wrapper">
+            <img class="item-image" src="{{item.product.image}}"></img>
+            <div class="item-price">price: {{ item.product.price}}</div>
+            <div class="item-qty">
+                qty: {{ item.quantity }}
+                <button data-product="{{item.product.id}}" data-action="add" class='product-button'>
+                    +
+                </button>
+                <button data-product="{{item.product.id}}" data-action="remove" class='product-button'>
+                    -
+                </button>
+            </div>
+            <div class="item-total">total: {{item.get_total}}</div>
+        </div>
+        {% endfor %}
+        <div class="nb-items">
+            <div class="total-items">items: {{order.get_cart_items}}</div>
+            <div class="total-cost">total: {{order.get_cart_total|floatformat:"2"}}</div>
+        </div>
+      </div>
+    <script src="{% static 'pages/cart.js' %}"></script>
+   
+   
+   <script type="text/javascript">
+      var form = document.getElementById('form');
+      var formButton = document.getElementById('form-button');
+      var total = '{{order.get_cart_total|floatformat:"2"}}'
+
+      formButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        console.log('Form Submitted!');
+        formButton.classList.add('hidden');
+        document.getElementById('payment-info').classList.remove('hidden');
+      });
+
+      document.getElementById('payment-info').addEventListener('click', function(e){
+        submitFormData();
+      })
+      
+      
+      function submitFormData(){
+        console.log('Payment button clicked!')
+
+        var userFormData = {
+          'name':null,
+          'email':null,
+          'total':total,
+        }
+        
+        var shippingInfo = {
+          'email':null,
+          'firstname':null,
+          'lastname':null,
+          'address':null,
+          'country':null,
+          'zipcode':null,
+          'city':null,
+          'state':null,
+        }
+
+        shippingInfo.email = form.email.value
+        shippingInfo.firstname = form.firstname.value
+        shippingInfo.lastname = form.lastname.value
+        shippingInfo.address = form.address.value
+        shippingInfo.country = form.country.value
+        shippingInfo.zipcode = form.zipcode.value
+        shippingInfo.city = form.city.value
+        shippingInfo.state = form.state.value
+
+        console.log('Data:', shippingInfo)
+      
+
+      var url = '/process_order/';
+    
+      const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrftoken,  
+        },
+      body: JSON.stringify({'form': userFormData, 'shipping': shippingInfo})
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Success:', data);
+      alert('Transaction completed!');
+
+      cart = {}
+      document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+      window.location.href = "{% url 'checkout' %}";
+    });
+
+    }
+
+    </script>
+
+</body>
+{% endblock content %}
+</html>

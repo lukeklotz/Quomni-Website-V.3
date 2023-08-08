@@ -1,0 +1,75 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'pages/cartStyle.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,200;0,500;1,200&display=swap" rel="stylesheet">
+
+    <script type="text/javascript">
+        var user = '{{request.user}}'
+
+        function getToken(name){
+            var cookieValue = null;
+        if(document.cookie && document.cookie !== ''){
+            var cookies = document.cookie.split(';');
+            for(var i = 0; i < cookies.length; ++i){
+                var cookie = cookies[i].trim();
+                if(cookie.substring(0, name.length + 1) === (name + '=')){
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue
+    }
+    var csrftoken = getToken('csrftoken');
+
+    function getCookie(name) {
+    var cookieArr = document.cookie.split(";")
+
+    for (var i = 0; i < cookieArr.length; ++i){
+        var cookiePair = cookieArr[i].split("=");
+        
+        if(name == cookiePair[0].trim()) {
+            return decodeURIComponent(cookiePair[1]);
+        }
+    }
+    return null;
+    }
+    var cart = JSON.parse(getCookie('cart'))
+
+    if(cart == undefined){
+        cart = {}
+        console.log('cart was created')
+        document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+    }
+    
+    </script>
+
+    <title>Document</title>
+</head>
+<body>
+    <a href='{% url 'index' %}' class="menu-btn">menu</a>
+    <h3 class="cart" >Your Cart is Empty!</h3>
+    <div class="container">
+    <div class="nav-bar-wrapper">
+        <div class="nav-bar">
+            <div class="item">item</div>
+            <div class="price">price</div>
+            <div class="quantity">quantity</div>
+            <div class="total">total</div>
+        </div>
+    </div>
+    </div>
+
+
+
+    <script src="{% static 'pages/cart.js' %}"></script>
+
+</body>
+</html>

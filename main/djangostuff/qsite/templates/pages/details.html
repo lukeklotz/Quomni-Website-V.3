@@ -1,0 +1,84 @@
+<!-- pages/details.html -->
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,200;0,500;1,200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'pages/detailStyle.css' %}">
+
+    <script type="text/javascript">
+        var user = '{{request.user}}'
+
+        function getToken(name){
+            var cookieValue = null;
+        if(document.cookie && document.cookie !== ''){
+            var cookies = document.cookie.split(';');
+            for(var i = 0; i < cookies.length; ++i){
+                var cookie = cookies[i].trim();
+                if(cookie.substring(0, name.length + 1) === (name + '=')){
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue
+    }
+    var csrftoken = getToken('csrftoken');
+
+
+    //cookies
+    //this is necessary for guest checkout
+    function getCookie(name) {
+    var cookieArr = document.cookie.split(";")
+
+    for (var i = 0; i < cookieArr.length; ++i){
+        var cookiePair = cookieArr[i].split("=");
+        
+        if(name == cookiePair[0].trim()) {
+            return decodeURIComponent(cookiePair[1]);
+        }
+    }
+    return null;
+    }
+    var cart = JSON.parse(getCookie('cart'))
+
+    if(cart == undefined){
+        cart = {}
+        console.log('cart was created')
+        document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+    }
+
+    console.log('cart:', cart)
+    </script>
+    <title>{{ product_object.title }} - Product Details</title>
+</head>
+<body>
+    <img src="{% static 'pages/images/Q logo PNG.png' %}" class="q-logo">
+    <button href='{% url 'cart' %}' id="cart" data-html="true" type="button" class="cart-button">
+        <a href='{% url 'cart' %}'>Cart({{cartItems}})</a>
+    </button>
+    <a href='{% url 'index' %}' class="menu-btn">menu</a>
+    
+    <div class="container"></div>
+        <h1 class="details">Details</h1>
+        <div class="wrapper">
+            <img src="{{ product_object.image }}" class="product-image">
+
+            <div class="items">
+                <h2 class="product-title">{{ product_object.title }}</h2>
+                <div class="product-description">{{ product_object.description|linebreaks }}</div>
+                <div class="product-price">${{ product_object.price }}</div>
+                <button data-product="{{ product_object.id }}" data-action="add" class="product-button">Add to Cart</button>
+            </div>
+        </div>   
+    </div> 
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="{% static 'pages/cart.js' %}"></script>
+    
+</body>
+</html>

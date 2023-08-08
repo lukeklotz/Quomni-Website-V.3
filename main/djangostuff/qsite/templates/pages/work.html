@@ -1,0 +1,48 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'pages/workStyle.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work</title>
+</head>
+<body>
+    <div class="menu-btn"><a href='{% url 'index' %}'>menu</a></div>
+    <div class="container">
+        <div class="gallery">
+            <div class="image"><img src="{% static 'pages/images/IMG_1749.JPG' %}" class="gallery__image"></div>
+            <div class="image"><img src="{% static 'pages/images/IMG_0429.JPG' %}" class="gallery__image"></div>
+            <div class="image"><img src="{% static 'pages/images/IMG_1587.JPG' %}"  class="gallery__image"></div>
+            <div class="image"><img src="{% static 'pages/images/4038FBD6-1727-4420-BEBC-9215296C4553.jpg' %}" class="gallery__image"></div>
+            <div class="image"><img src="{% static 'pages/images/Q logoz.jpg' %}" class="gallery__image"></div>
+        </div>
+
+        <div class="popup-image">
+            <span>&times;</span>
+            <img id="popup-img" src="" class="gallery__image">
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.gallery img').forEach(image => {
+            image.onclick = () => {
+                const popupImage = document.querySelector('#popup-img');
+                const src = image.getAttribute('src');
+                popupImage.src = src;
+                document.querySelector('.popup-image').style.display = 'block';
+            };
+        });
+
+        document.querySelector('.popup-image span').onclick = () => {
+            document.querySelector('.popup-image').style.display = 'none';
+        };
+    </script>
+
+</body>
+</html>

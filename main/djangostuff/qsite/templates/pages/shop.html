@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'pages/shopStyle.css' %}">
+    
+    <script type="text/javascript">
+        var user = '{{request.user}}'
+
+        function getToken(name){
+            var cookieValue = null;
+        if(document.cookie && document.cookie !== ''){
+            var cookies = document.cookie.split(';');
+            for(var i = 0; i < cookies.length; ++i){
+                var cookie = cookies[i].trim();
+                if(cookie.substring(0, name.length + 1) === (name + '=')){
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue
+    }
+    var csrftoken = getToken('csrftoken');
+
+    //cookies
+    //this is necessary for guest checkout
+    function getCookie(name) {
+    var cookieArr = document.cookie.split(";")
+
+    for (var i = 0; i < cookieArr.length; ++i){
+        var cookiePair = cookieArr[i].split("=");
+        
+        if(name == cookiePair[0].trim()) {
+            return decodeURIComponent(cookiePair[1]);
+        }
+    }
+    return null;
+    }
+    var cart = JSON.parse(getCookie('cart'))
+
+    if(cart == undefined){
+        cart = {}
+        console.log('cart was created')
+        document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+    }
+
+    console.log('cart:', cart)
+    </script>
+    
+    <title>Shopping Section</title>
+</head>
+<body>
+<div class="wrapper"></div>
+    <button href='{% url 'cart' %}' id="cart" data-html="true" type="button" class="cart-button" data-bs-toggle="popover" data-bs-placement="left">
+        <a href='{% url 'cart' %}'>Cart({{cartItems}})</a>
+    </button>
+    <div class="menu-btn"><a href='{% url 'index' %}'>menu</a></div>
+    <section class="shopping section">
+        <div class="shopping-section">
+            {% for product in products %}
+                <div class="product-white">
+                    <a href="details/{{ product.id }}" class="product-image">
+                        <img src="{{ product.image }}" alt="{{ product.title }}">
+                    </a>
+                    <div id="{{ product.id }}" class="product-title">{{ product.title }}</div>
+                    <div class="product-price">${{ product.price }}</div>
+                    <button data-product="{{ product.id }}" data-action="add" class="product-button">Add to Cart</button>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="{% static 'pages/cart.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+/* shopStyle.css */
+
+/* Reset CSS to apply to all elements */
+body,
+div,
+a,
+button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #e7e7e7;
+    color: black;
+    display: flex;
+    font-family: 'Roboto Mono', monospace;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.cart-button {
+    position: fixed;
+    background-color: rgb(255, 46, 46);
+    color: white;
+    top: 0;
+    right: 12rem;
+    font-size: 2.2em;
+    padding: 0.5em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.menu-btn{
+    position: fixed;
+    top: 0px;
+    right: 0.3em;
+    font-size: 3.2em;
+    padding: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 30px;
+    margin: 5px auto 30px;
+}
+
+.shopping-section {
+    display: grid;
+    padding-top: 100px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 80px;
+}
+
+.product-white {
+    background-color: rgb(105, 185, 118);
+    padding: 20px;
+    margin: 20px;
+    text-align: center;
+    border: 2px solid #000;
+    box-sizing: border-box;
+}
+
+.product-image img {
+    width: 31em;
+    height: 40em;
+    border: 2px solid black;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.product-title {
+    font-size: 30px;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 10px;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 100;
+}
+
+.product-description {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.product-price {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.product-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #222;
+    color: #fff;
+    border: 1px solid #fff;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.product-button:hover {
+    background-color: rgb(105, 185, 118);
+    cursor: pointer;
+    color: #000;
+}
