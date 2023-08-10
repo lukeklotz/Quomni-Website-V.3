@@ -48,11 +48,13 @@
             </div>
         </div>
     </div>
-    <div class="image-container">
-        <img src="{% static 'pages/images/kiddo.png' %}" alt="image" class="draggable-image">
-      </div>
-      <div class="image-container">
-        <img src="{% static 'pages/images/homer.gif' %}" alt="image2" class="draggable-image" id="homer">
-      </div>
+    <div class="hide-on-mobile">
+        <div class="image-container">
+            <img src="{% static 'pages/images/kiddo.png' %}" alt="image" class="draggable-image">
+        </div>
+        <div class="image-container">
+            <img src="{% static 'pages/images/homer.gif' %}" alt="image2" class="draggable-image" id="homer">
+        </div>
+    </div>
 </body>
 </html>

@@ -29,19 +29,18 @@ body {
     max-width: 200px;
     font-size: 200%;
     padding: 10px;
-    position: absolute; /* Positioned relative to the .container */
-    top: 15%; /* Moves the cart 50% from the top edge of .container */
-    left: 30%; /* Moves the cart 50% from the left edge of .container */
-    transform: translate(-50%, -50%); /* Centers the cart both vertically and horizontally */
+    position: absolute; 
+    top: 15%; 
+    left: 30%; 
+    transform: translate(-50%, -50%); 
   }
   
   .container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    border: 7px solid #00f034;
+    border: 3px solid black;
     position: relative; 
-    background-color: rgb(77, 58, 243);
   }
   
   h1 {
@@ -75,6 +74,7 @@ body {
     flex: 1;
     text-align: center;
     font-weight: bold;
+    font-size: 2em;
     color: #333;
   }
 
@@ -99,6 +99,7 @@ body {
     justify-content: center;
     justify-content: space-between;
     max-width: 850px;
+    font-size: 1.5em;
     padding: 40px;
   }
   

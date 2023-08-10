@@ -1,7 +1,7 @@
 html,
 body{
     margin: 0;
-    padding: 500;
+    padding: 0f;
     font-family: 'Roboto Mono', monospace;
 }
 
@@ -155,4 +155,11 @@ li, a{
 }
 .draggable-image:hover{
     cursor: pointer;
+}
+
+@media screen and (max-width: 600px)
+{
+    .hide-on-mobile img {
+        display: none;
+    }
 }

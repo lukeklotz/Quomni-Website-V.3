@@ -11,6 +11,16 @@ a{
   text-decoration: none;
   color: black;
 }
+
+.q-logo {
+  position: fixed;
+  bottom: 0px;
+  right: 0em;
+  min-width: 10%; 
+  width: 10%; 
+  flex: 1;
+}
+
 .menu-btn{
   position: fixed;
   top: 0px;
@@ -20,6 +30,16 @@ a{
   text-transform: uppercase;
   cursor: pointer;
 }
+
+.kiddo img {
+  position: fixed;
+  bottom: 4em;
+  right: 0em;
+  min-width: 10%; 
+  width: 10%; 
+  flex: 1;
+}
+
 .container .gallery
 {
   display: flex;
@@ -40,7 +60,7 @@ a{
 }
 
 .container .gallery img:hover {
-  transform: scale(1.1);
+  transform: scale(1.02);
   z-index: 5;
 }
 
