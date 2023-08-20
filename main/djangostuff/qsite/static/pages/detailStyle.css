@@ -11,23 +11,22 @@ a {
 .cart-button {
     position: fixed;
     background-color: rgb(255, 46, 46);
+    border: none;
     color: white;
     top: 0;
-    right: 12rem;
-    font-size: 2.2em;
-    padding: 0.5em;
+    right: 15vw;
+    font-size: 1.9vw;
+    padding: 0.9vw;
     text-transform: uppercase;
     cursor: pointer;
 }
 .menu-btn {
     position: fixed;
     top: 0px;
-    right: 0;
-    font-size: 2.9em;
-    padding: 0.5em;
+    right: 0.3em;
+    font-size: 2.8vw;
+    padding: 0.2em;
     text-transform: uppercase;
-    text-decoration: none;
-    color: black;
     cursor: pointer;
 }
 
@@ -45,40 +44,43 @@ a {
 
 .product-image {
     border: 1px solid black;
+    max-height: 50vw;
+    max-width: 50vw;
 }
 
 .container {
-    padding-top: 15em;
+    padding-top: 5vw;
 }
 
 .product-title {
-    font-size: large;
+    font-size: 2vw;
 }
 
 .details{
-    padding-left: 25em;
+    padding-left: 33vw;
+    font-size: 2vw;
     font-weight: 600;
 }
 
 .wrapper{
     display: flex;
-    padding-bottom: 45em;
-    padding-left: 50em;
+    padding-bottom: 30vw;
+    padding-left: 20vw;
 }
 
 .items{
     order: 1;
-    padding: 50px;
+    padding: 5vw;
 }
 
 .product-button {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 1vw 2vw;
     background-color: #222;
     color: #fff;
-    border: 1px solid #fff;
+    border: 0.1vw solid #fff;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 1vw;
     transition: background-color 0.3s, color 0.3s;
 }
 

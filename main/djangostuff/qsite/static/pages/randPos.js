@@ -1,4 +1,4 @@
-function getRandomPosition(min, max, size) {
+function getRandomPosition(min, max) {
   const randX = Math.random() * (max - min) + min;
   const randY = Math.random() * (max - min) + min;
   return [randX, randY];
@@ -7,9 +7,8 @@ function getRandomPosition(min, max, size) {
 const randomImages = document.querySelectorAll('.draggable-image');
 
 randomImages.forEach((image, index) => {
-  const container = image.parentElement;
-  const containerWidth = container.clientWidth;
-  const containerHeight = container.clientHeight;
+  const containerWidth = container.clientWidth / 2 + 500;
+  const containerHeight = container.clientHeight / 2;
   const imageWidth = image.clientWidth;
   const imageHeight = image.clientHeight;
 
@@ -17,7 +16,7 @@ randomImages.forEach((image, index) => {
   let randX, randY;
 
   while (overlap) {
-    [randX, randY] = getRandomPosition(0, containerWidth - imageWidth, 0, containerHeight - imageHeight);
+    [randX, randY] = getRandomPosition(containerWidth - imageWidth, containerHeight - imageHeight);
 
     // Check if the current image overlaps with any previous images
     overlap = false;
@@ -43,7 +42,7 @@ randomImages.forEach((image, index) => {
     const { innerWidth, innerHeight } = window;
     if (randX < 0) randX = 0;
     if (randX + imageWidth > innerWidth) randX = innerWidth - imageWidth;
-    if (randY < 0) randY = 0;
+    if (randY < 0) randY = 50;
     if (randY + imageHeight > innerHeight) randY = innerHeight - imageHeight;
   }
 
