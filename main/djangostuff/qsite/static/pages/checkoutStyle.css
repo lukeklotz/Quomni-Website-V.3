@@ -144,7 +144,7 @@ hr {
   cursor: pointer;
   outline: 0;
 }
-.payment-info{
+#paypal-button-container{
   text-align: center;
 }
 

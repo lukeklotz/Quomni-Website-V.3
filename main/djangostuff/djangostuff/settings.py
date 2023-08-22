@@ -134,3 +134,6 @@ EMAIL_HOST = 'smtp-mail.outlook.com'
 EMAIL_HOST_USER = 'lukeklotz@outlook.com'
 EMAIL_HOST_PASSWORD = 'G04217393'
 EMAIL_PORT = 587
+
+#Allow pop-up for paypal
+SECURE_CROSS_ORIGIN_OPENER_POLICY='same-origin-allow-popups'
