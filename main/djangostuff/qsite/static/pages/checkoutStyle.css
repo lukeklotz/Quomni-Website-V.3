@@ -53,16 +53,14 @@ hr {
 }
 
 .menu-btn{
-    position: fixed;
-    top: 0px;
-    right: 30px;
-    font-size: 2.2em;
-    padding: 0.5em;
-    text-transform: uppercase;
-    cursor: pointer;
-    font-family: 'Roboto Mono', monospace;
-    text-decoration: none;
-    color:black;
+  position: fixed;
+  top: 0px;
+  right: 0.3em;
+  font-size: 2.8vw;
+  padding: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: black;
 }
 
 .checkout-wrapper {
@@ -95,12 +93,12 @@ hr {
   display: flex;
   flex-direction: column;
   border: 1px solid var(--color-lighter-gray);
-  padding: .5rem;
+  padding: 0.4vw;
   border-radius: 1rem;
 }
 .field__label {
   color: var(--color-gray);
-  font-size: 0.6rem;
+  font-size: 0.8vw;
   font-weight: 300;
   text-transform: uppercase;
   margin-bottom: 0.25rem
@@ -136,14 +134,13 @@ hr {
 .form-button {
   background-color: rgb(105, 185, 118);
   text-transform: uppercase;
-  font-size: 0.8rem;
+  font-size: 2rem;
   font-weight: 600;
   display: block;
-  color: #fff;
+  color: #000000;
   width: 100%;
   padding: 1rem;
-  border-radius: 4rem;
-  border: 0;
+  border: 0.1vw solid black;
   cursor: pointer;
   outline: 0;
 }
@@ -166,23 +163,22 @@ hr {
 /*cart styles begin here*/
 
 .cart {
-  max-width: 200px;
-  font-size: 200%;
+  max-width: 20vw;
+  font-size: 2.3vw;
   padding: 10px;
   position: absolute; /* Positioned relative to the .container */
   top: 15%; /* Moves the cart 50% from the top edge of .container */
-  left: 63%; /* Moves the cart 50% from the left edge of .container */
+  left: 83%; /* Moves the cart 50% from the left edge of .container */
   transform: translate(-50%, -50%); /* Centers the cart both vertically and horizontally */
 }
 
 .items-container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
-  width: 50rem;
-  border: 7px solid #00f034;
+  padding: 2vw;
+  width: 50vw;
+  border: 0.3vw solid black;
   position: relative; 
-  background-color: rgb(77, 58, 243);
 }
 
 h1 {
@@ -214,23 +210,10 @@ h1 {
 .nav-bar .quantity,
 .nav-bar .total {
   flex: 1;
+  font-size: 1.5vw;
   text-align: center;
   font-weight: bold;
   color: #333;
-}
-
-.checkout-btn-container{
-  padding-top: 5em;
-}
-
-.checkout-btn{
-  font-size: 50px;
-}
-
-.checkout-btn:hover{
-  cursor: pointer;
-  background-color: #00f034;
-  position: relative;
 }
 
 /* Item Styles */
@@ -246,15 +229,14 @@ h1 {
 .nb-items {
   display: flex;
   justify-content: center;
-  row-gap: 1000px;
-  padding: 13px;
-  max-width: 800px;
+  row-gap: 100vw;
+  max-width: 80vw;
   position: absolute; /* Positioned relative to the .container */
   left: 50%; /* Moves the items 50% from the left edge of .container */
   transform: translateX(-50%); /* Centers the items horizontally */
   padding-left: 500px;
-  margin-bottom: 50px;
-  bottom: -30%;
+  margin-bottom: 15vw;
+  bottom: -50%;
 }
 
 .total-items,

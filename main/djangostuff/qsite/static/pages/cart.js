@@ -15,9 +15,7 @@ for(var i = 0; i < updateBtns.length; i++){
 }
 
 function isEmpty(){
-
     var i = 0;
-
     while(i <= 19){
         if(cart[productId[i]]['quantity'] <= 0){
             console.log("cart is empty!")
