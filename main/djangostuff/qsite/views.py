@@ -1,12 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse
+from django.views import View
 from .models import *
 import datetime
 from django.http import JsonResponse
 import json
-from django.core.mail import send_mail
 from django.conf import settings
 import logging
 import ssl
+import stripe
+from django.views.generic import TemplateView
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+from django.shortcuts import redirect
 
 from .utils import *
 # Create your views here.
@@ -16,14 +21,8 @@ def index(request):
 
 def shop(request):
 
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
-    else:
-        cookieData = cookieCart(request)
-        cartItems = cookieData['cartItems']
+    cookieData = cookieCart(request)
+    cartItems = cookieData['cartItems']
 
     products = Products.objects.all()
     context = {'products':products, 'cartItems': cartItems}
@@ -39,47 +38,72 @@ def cart(request):
         return render(request, 'pages/cart.html', cartData(request))
 
 def checkout(request):
-    return render(request, 'pages/checkout.html', cartData(request))
+    stripe_api_key = getattr(settings, 'STRIPE_API_KEY', None)
+    if request.method == 'POST':
+        # Handle the data you need to create the Checkout Session, like products, quantities, etc.
+        # Calculate the total amount in cents (Stripe uses cents for currency values)
 
-
-
-logger = logging.getLogger(__name__)
-
-def send_email(request):
-
-    try:
-        cart_data = cookieCart(request)
-
-        items = cart_data['items']
-        order = cart_data['order']
-        cart_items_count = cart_data['cartItems']
-
-        # Accumulate product names in a string
-        product_names = ""
-        for item in items:
-            product_name = item['product']['name']
-            product_names += f"{product_name}\n"
-
-        subject = 'Someone purchased items from your shop!'
-        from_email = 'lukeklotz@outlook.com'
-        recipient = ['lukeklotz@gmail.com']
-
-        send_mail(
-            subject,
-            product_names,
-            from_email,
-            recipient,
+        checkout_session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[
+                {
+                    'price_data': {
+                        'currency': 'usd',
+                        'unit_amount': '1000',
+                        'product_data': {
+                            'name': 'Your Product Name',
+                            'images': ['product_image_url'],
+                        },
+                    },
+                    'quantity': 1,
+                },
+            ],
+            mode='payment',
+            success_url=request.build_absolute_uri(reverse('completed')),
+            cancel_url=request.build_absolute_uri(reverse('failed')),
         )
 
-        # Log success message
-        logger.info("Email sent successfully!")
-    except Exception as e:
-        # Log error message
-        logger.error(f"Error sending email: {str(e)}")
+        return JsonResponse({'sessionId': checkout_session.id})
+    return render(request, 'pages/checkout.html', cartData(request))
 
-    return render(request, 'pages/index.html', cartData(request))
+class ProductLandingPageView(TemplateView):
+    template_name = "pages/testCheckout.html"
+    
+@method_decorator(csrf_exempt, name='dispatch')
+class CreateCheckoutSessionView(View):
+    def post(self, request, *args, **kwargs):
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        
+        # Get item_ids from cookieCart
+        orderTotals = cookieCart(request)
+        items = orderTotals['items']  # The 'items' list containing product data
+        
+        YOUR_DOMAIN = 'http://127.0.0.1:8000/'
+        line_items = []
 
+        # Create line items for each item in the 'items' list
+        for item in items:
+            line_items.append({
+                'price': item['product']['item_id'],  # Assuming item_id is the Price ID
+                'quantity': item['quantity'],
+            })
+        
+        # Create checkout session with multiple line items
+        checkout_session = stripe.checkout.Session.create(
+            line_items=line_items,
+            mode='payment',
+            success_url=YOUR_DOMAIN + '/paymentCompleted.html',
+            cancel_url=YOUR_DOMAIN + '/paymentFailed.html',
+            automatic_tax={'enabled': True},
+        )
+        
+        return redirect(checkout_session.url)
 
+def paymentSuccessful(request):
+    stripe_api_key = getattr(settings, 'STRIPE_API_KEY', None)
+    
+
+logger = logging.getLogger(__name__)
 
 def work(request):
     return render(request, 'pages/work.html')
@@ -156,3 +180,12 @@ def processOrder(request):
         order.complete = True
     order.save()
     return JsonResponse('Transaction has been completed!', safe=False)
+
+def paymentCompletedView(request):
+    return render(request, 'pages/paymentCompleted.html')
+
+def paymentFailedView(request):
+    return render(request, 'pages/paymentFailed.html')
+
+
+

@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,200;0,500;1,200&display=swap" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
 
     <script type="text/javascript">
         var user = '{{request.user}}'
@@ -87,9 +88,9 @@
         <div class="total-items">items: {{order.get_cart_items}}</div>
         <div class="total-cost">total: {{order.get_cart_total}}</div>
         <div class="checkout-btn-container">
-            <button class="checkout-btn">
-                <a href='{% url 'checkout' %}'>Checkout</a>
-            </button>
+            <form action="/create-checkout-session" method="POST">
+                <button type="submit" class="checkout-btn" id="checkout-button">Checkout</button>
+              </form>
         </div>
     </div>
 

@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 class Products(models.Model):
@@ -8,6 +10,7 @@ class Products(models.Model):
     category = models.CharField(max_length=300)
     description = models.TextField()
     image = models.CharField(max_length=200)
+    item_id = models.CharField(max_length=200)
 
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
@@ -60,3 +63,14 @@ class ShippingAddress(models.Model):
     zipcode = models.CharField(max_length=200,null=True)
     date_added = models.DateTimeField(auto_now_add=True)
    
+   
+# user payments
+
+class UserPayment(models.Model):
+    payment_bool = models.BooleanField(default="False")
+    stripe_checkout_id = models.CharField(max_length=500)
+
+@receiver(post_save, sender=Order)
+def create_user_payment(sender, instance, created, **kwargs):
+    if created:
+        UserPayment.objects.create(user_order=instance)

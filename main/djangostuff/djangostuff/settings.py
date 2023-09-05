@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    #paypal integration
+    "paypal.standard.ipn"
 ]
 
 MIDDLEWARE = [
@@ -56,7 +59,7 @@ ROOT_URLCONF = 'djangostuff.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -132,8 +135,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp-mail.outlook.com'
 EMAIL_HOST_USER = 'lukeklotz@outlook.com'
-EMAIL_HOST_PASSWORD = 'G04217393'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
+
+#strip api key
+STRIPE_PUBLIC_KEY = "pk_live_51NhyBkAahtMNwb6cfeBL2yu6iHSThkpusWJIfj3TiUV47Tevfggm6ZRxpnf5d5TR9x1R2MqxddeiGCmov078Kp0a00mKqJlWWR"
+STRIPE_SECRET_KEY= "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"
+STRIPE_WEBHOOK_SECRET = ""
 
 #Allow pop-up for paypal
 SECURE_CROSS_ORIGIN_OPENER_POLICY='same-origin-allow-popups'
+
+

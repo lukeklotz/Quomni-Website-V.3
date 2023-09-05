@@ -24,6 +24,7 @@ def cookieCart(request):
 
             item = {
                 'product':{
+                    'item_id': product.item_id, # used for stripe payment
                     'id': product.id,
                     'name': product.title,
                     'price': product.price,
@@ -32,7 +33,7 @@ def cookieCart(request):
                 'quantity':cart[i]['quantity'],
                 'get_total':total,
             }
-
+            print("Adding item_id:", product.item_id)  # Add this line to check item_id
             items.append(item)
         except:
             pass

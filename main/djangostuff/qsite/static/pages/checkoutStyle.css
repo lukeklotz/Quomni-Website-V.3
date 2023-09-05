@@ -17,7 +17,7 @@ li, a{
 *:before,
 *:after {
   box-sizing: inherit;
-  background-color: #f7f7f7;
+  background-color: #d0d0e9;
 }
 
 html {
