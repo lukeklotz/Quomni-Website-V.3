@@ -22,8 +22,8 @@ urlpatterns = [
     path('create-checkout-session', CreateCheckoutSessionView.as_view(), name='create-checkout-session'),
     
     #Payment complete/failed
-    #path('paymentCompleted.html/', views.paymentCompletedView, name="completed"),
-    #path('paymentFailed.html/', views.paymentFailedView, name="failed"),
+    path('paymentCompleted.html/', views.paymentCompletedView, name="paymentCompleted"),
+    path('paymentFailed.html/', views.paymentFailedView, name="paymentFailed"),
 ]
 
 # Serving static files during development

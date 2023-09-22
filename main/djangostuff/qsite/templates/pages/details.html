@@ -67,14 +67,16 @@
         <h1 class="details">Details</h1>
         <div class="wrapper">
             <img src="{{ product_object.image }}" class="product-image">
-
+        </div>
+        <div class="gap">
+            
+        </div>
             <div class="items">
                 <h2 class="product-title">{{ product_object.title }}</h2>
                 <div class="product-description">{{ product_object.description|linebreaks }}</div>
                 <div class="product-price">${{ product_object.price }}</div>
                 <button data-product="{{ product_object.id }}" data-action="add" class="product-button">Add to Cart</button>
-            </div>
-        </div>   
+            </div>  
     </div> 
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

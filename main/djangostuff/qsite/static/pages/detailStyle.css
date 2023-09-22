@@ -50,6 +50,7 @@ a {
 
 .container {
     padding-top: 5vw;
+    display: flex;
 }
 
 .product-title {
@@ -64,13 +65,20 @@ a {
 
 .wrapper{
     display: flex;
-    padding-bottom: 30vw;
-    padding-left: 20vw;
+    padding-bottom: 0vw;
+    padding-left: 30%;
+    padding-right: 10%;
+    float: left
+}
+
+.product-title{
+    font-size: 3vw;
 }
 
 .items{
     order: 1;
     padding: 5vw;
+    flex: 1;
 }
 
 .product-button {
@@ -88,4 +96,58 @@ a {
     background-color: rgb(105, 185, 118);
     cursor: pointer;
     color: #000;
+}
+
+@media (max-width: 768px) {
+    .q-logo {
+        padding-top: 0;
+        padding-left: 0px;
+        width: 15%; 
+    }
+    .cart-button {
+        font-size: 3.9vw;
+    }
+    .menu-btn {
+        
+        font-size: 4.8vw;
+        padding-top: 0;
+        padding-right: 0;
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center items horizontally */
+        text-align: center; /* Center text horizontally */
+    }
+    .details{
+        display: flex;
+        flex-direction: column;
+        padding-left: 0;
+        align-items: center; /* Center items horizontally */
+        text-align: center; /* Center text horizontally */
+        font-size: 7vw;
+    }
+    .product-image {
+        border: 1px solid black;
+        max-height: 90vw;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    .wrapper {
+        flex-direction: column; /* Stack items vertically on mobile */
+        align-items: center; /* Center items horizontally */
+        text-align: center; /* Center text horizontally */
+        padding-left: 15%;
+    }
+    
+    .items {
+        margin-top: 3vw; /* Add some space between the image and text */
+        margin-right: 0; /* Remove right margin */
+        padding: 0vw; /* Remove padding */
+        align-items: center; /* Center items horizontally */
+        text-align: center;
+    }
+    .product-button {
+        font-size: 3vw;
+    }
 }

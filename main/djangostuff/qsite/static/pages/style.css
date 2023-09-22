@@ -94,7 +94,7 @@ li, a{
 .contact{
     position: fixed;
     top: 55%;
-    left: 33%;
+    left: 55%;
     transform: translate(-50%, -50%) scale(0);
     transition: 50ms ease-in-out;
     border: 1px solid black;
@@ -158,9 +158,35 @@ li, a{
     cursor: pointer;
 }
 
-@media screen and (max-width: 600px)
-{
+/* Media Query for Mobile */
+@media (max-width: 768px) {
+    .menu-container {
+        width: 100%;
+        margin-left: 0;
+        padding-top: 12vw;
+        font-size: 4.3vw;
+    }
+
+    .item-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Center vertically */
+        align-items: center; /* Center horizontally */
+    }
+
     .hide-on-mobile img {
         display: none;
     }
+
+    .q-logo{
+        width: 25%;
+        padding-top: 0;
+    }
+
+    .menu-btn{
+        font-size: 5vw;
+        display: none;
+    }
+
+    /* Add more mobile-specific styles as needed */
 }

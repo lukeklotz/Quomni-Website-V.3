@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-$v=izeeph(=0(s!%u_c-nkn0m#w+&)*xg^$r)%f)knekluhjcj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,9 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
-    #paypal integration
-    "paypal.standard.ipn"
 ]
 
 MIDDLEWARE = [
@@ -140,7 +137,7 @@ EMAIL_PORT = 587
 
 #strip api key
 STRIPE_PUBLIC_KEY = "pk_live_51NhyBkAahtMNwb6cfeBL2yu6iHSThkpusWJIfj3TiUV47Tevfggm6ZRxpnf5d5TR9x1R2MqxddeiGCmov078Kp0a00mKqJlWWR"
-STRIPE_SECRET_KEY= "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"
+STRIPE_SECRET_KEY= "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"
 STRIPE_WEBHOOK_SECRET = ""
 
 #Allow pop-up for paypal

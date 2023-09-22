@@ -1,3 +1,4 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,9 +7,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="{% static 'pages/paymentCompleted.css' %}">
     <title>Payment Complete</title>
 </head>
 <body>
-   Payment Completed!
+    <div class="container">
+        <h1>
+            Payment Completed!
+        </h1>
+        <p>
+            Thank you!
+        </p>
+    </div>
 </body>
 </html>

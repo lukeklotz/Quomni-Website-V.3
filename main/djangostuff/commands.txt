@@ -1,0 +1,2 @@
+docker build --tag q-site .
+docker run --publish 8000:8000 q-site

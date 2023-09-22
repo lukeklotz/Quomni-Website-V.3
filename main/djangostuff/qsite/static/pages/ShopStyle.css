@@ -1,6 +1,3 @@
-/* shopStyle.css */
-
-/* Reset CSS to apply to all elements */
 body,
 div,
 a,
@@ -111,4 +108,42 @@ a {
     background-color: rgb(105, 185, 118);
     cursor: pointer;
     color: #000;
+}
+
+@media (max-width: 768px) {
+    
+    .shopping-section {
+        grid-template-columns: repeat(2, 1fr);
+        justify-content: center; /* Horizontally center the items */
+        padding-left: 4.6vw;
+        align-items: center;
+        margin-top: 4vh;
+    }
+    .menu-btn {
+        font-size: 5vw;
+    }
+    .product-title {
+        font-size: 4.2vw;
+    }
+    .cart-button {
+        font-size: 3.9vw;
+    }
+    .product-white {
+        border: 1px solid #000;
+    }
+    .product-image img {
+       width: 40vw;
+       height: 45.5vw;
+       border: 1px solid black;
+    }
+    .product-button {
+        display: inline-block;
+        padding: 0.3vw 0.3vw;
+        background-color: rgb(12, 12, 12);
+        color: rgb(217, 226, 217);
+        border: 1px solid #000000;
+        text-decoration: none;
+        font-size: 2.1vw;
+        transition: background-color 0.3s, color 0.3s;
+    }
 }

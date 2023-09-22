@@ -7,7 +7,6 @@ def cookieCart(request):
     except:
         cart = {}
     
-    print('cart:', cart)
     items = []
     order = {'get_cart_total': 0, 'get_cart_items': 0}
     cartItems = order['get_cart_items']
@@ -33,7 +32,7 @@ def cookieCart(request):
                 'quantity':cart[i]['quantity'],
                 'get_total':total,
             }
-            print("Adding item_id:", product.item_id)  # Add this line to check item_id
+            print("Adding item_id:", product.item_id)  # check item_id
             items.append(item)
         except:
             pass
@@ -41,16 +40,10 @@ def cookieCart(request):
 
 def cartData(request):
 
-        if request.user.is_authenticated:
-            customer = request.user.customer
-            order, created = Order.objects.get_or_create(customer=customer, complete=False)
-            items = order.orderitem_set.all()
-            cartItems = order.get_cart_items
-        else:
-            cookieData = cookieCart(request)
-            cartItems = cookieData['cartItems']
-            order = cookieData['order']
-            items = cookieData['items']
+        cookieData = cookieCart(request)
+        cartItems = cookieData['cartItems']
+        order = cookieData['order']
+        items = cookieData['items']
 
         return {'items':items, 'order':order, 'cartItems':cartItems}
 

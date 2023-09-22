@@ -40,8 +40,6 @@ def cart(request):
 def checkout(request):
     stripe_api_key = getattr(settings, 'STRIPE_API_KEY', None)
     if request.method == 'POST':
-        # Handle the data you need to create the Checkout Session, like products, quantities, etc.
-        # Calculate the total amount in cents (Stripe uses cents for currency values)
 
         checkout_session = stripe.checkout.Session.create(
             payment_method_types=['card'],
@@ -59,8 +57,8 @@ def checkout(request):
                 },
             ],
             mode='payment',
-            success_url=request.build_absolute_uri(reverse('completed')),
-            cancel_url=request.build_absolute_uri(reverse('failed')),
+            success_url=request.build_absolute_uri(reverse('paymentComleted')),
+            cancel_url=request.build_absolute_uri(reverse('paymentFailed')),
         )
 
         return JsonResponse({'sessionId': checkout_session.id})
@@ -95,6 +93,10 @@ class CreateCheckoutSessionView(View):
             success_url=YOUR_DOMAIN + '/paymentCompleted.html',
             cancel_url=YOUR_DOMAIN + '/paymentFailed.html',
             automatic_tax={'enabled': True},
+            billing_address_collection='required',  # Set to 'required' to collect billing address
+            shipping_address_collection={
+                'allowed_countries': ['US'],  # Specify the countries for which you want to collect shipping address
+            },
         )
         
         return redirect(checkout_session.url)
@@ -114,14 +116,8 @@ def about(request):
 def details(request, id):
     product_object = Products.objects.get(id=id)
 
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
-    else:
-        cookieData = cookieCart(request)
-        cartItems = cookieData['cartItems']
+    cookieData = cookieCart(request)
+    cartItems = cookieData['cartItems']
 
     products = Products.objects.all()
     context = {'products':products, 'cartItems': cartItems, 'product_object':product_object}
@@ -161,17 +157,7 @@ def processOrder(request):
     transaction_id = datetime.datetime.now().timestamp()
     data = json.loads(request.body)
 
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer)
-        total = float(data['from']['total'])
-        order.transaction_id = transaction_id
-
-        if total == order.get_cart_total:
-            order.complete = True
-        order.save()
-    else:
-        order = GuestOrder(request, data)
+    order = GuestOrder(request, data)
 
     total = float(data['form']['total'])
     order.transaction_id = transaction_id

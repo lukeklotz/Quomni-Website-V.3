@@ -48,3 +48,23 @@ a {
     font-weight: 200;
     font-size: 3vw;
   }
+
+  @media (max-width: 768px) {
+    .container {
+      position: relative;
+      width: 100%;
+      text-align: left;
+    }    
+
+    h1 {
+      font-size: 14vw;
+    }
+    p{
+      font-size: 10vw;
+    }
+    
+    .menu-btn{
+      font-size: 5vw;
+      
+    }
+}

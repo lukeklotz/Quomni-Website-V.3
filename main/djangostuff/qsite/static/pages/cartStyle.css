@@ -75,8 +75,8 @@ body {
   }
 
   .product-button {
-    font-size: 1vw;
-    padding: 0.2vw;
+    font-size: 0.7vw;
+    padding: 0.1vw;
     border: 0.1vw solid black;
   }
 
@@ -151,4 +151,65 @@ body {
     padding-top: 1.4vw;
     font-size: 1vw;
     font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      max-width: 70vw;
+      max-height: 100%;
+      margin: 0 auto;
+      padding: 2vw;
+      margin-top: 30%;
+      border: 0.2vw solid black;
+      position: relative; 
+    }
+    .items-wrapper{
+      max-width: 93%;
+      gap: 4vw;
+    }
+    .nav-bar .item,
+    .nav-bar .price,
+    .nav-bar .quantity,
+    .nav-bar .total {
+      flex: 1;
+      text-align: center;
+      font-weight: bold;
+      font-size: 3.2vw;
+      color: #333;
+    }
+
+    .item-image {
+      max-width: 7.8vw;
+      height: auto;
+      margin-left: 4vw;
+    }
+    
+    .item-price,
+    .item-qty,
+    .item-total {
+      padding-top: 1.4vw;
+      font-size: 2.0vw;
+    }
+
+    .total-items,
+    .total-cost {
+      font-size: 2.5vw;
+    }
+
+    .menu-btn{
+      font-size: 4.8vw;
+    }
+
+    .cart {
+      font-size: 5.5vw;
+      top: 8%; 
+      left: 50%; 
+    }
+
+    .product-button {
+      font-size: 1.1vw;
+      padding: 0;
+      border: 0.01vw solid black;
+    }
+    
   }
