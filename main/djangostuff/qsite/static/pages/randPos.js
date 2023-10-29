@@ -7,8 +7,8 @@ function getRandomPosition(min, max) {
 const randomImages = document.querySelectorAll('.draggable-image');
 
 randomImages.forEach((image, index) => {
-  const containerWidth = container.clientWidth / 2 + 500;
-  const containerHeight = container.clientHeight / 2;
+  const containerWidth = container.clientWidth / 2 + 1000;
+  const containerHeight = container.clientHeight / 4 + 500;
   const imageWidth = image.clientWidth;
   const imageHeight = image.clientHeight;
 
