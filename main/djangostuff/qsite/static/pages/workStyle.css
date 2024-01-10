@@ -22,43 +22,35 @@ a{
   cursor: pointer;
 }
 
-.kiddo img {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  min-width: 10%; 
-  width: 10%; 
-  flex: 1;
-}
-
 .container .gallery
 {
   display: flex;
-  flex-direction: column;
-  justify-content: left;
-  align-items: left;
+  flex-wrap: wrap;
+  flex: 5;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  max-width: 100%;
+  padding-bottom: 50%;
+  max-height: 100%;
   
 }
 
  .container .gallery img {
-  float: left;
-  max-width: 500vw;
+  padding-top: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: auto;
-  object-fit: cover;
-  margin-left: 10vw;
-  margin-bottom: 0.1vw;
 }
 
 .container .gallery img:hover {
   transform: scale(0.95);
-  z-index: 2;
+  z-index: 4;
 }
 
 .container .gallery__image {
-  width: calc(50% - 10px);
-  height: calc(33.33% - 10px);
+  max-height: 200px; /* Set a fixed height for all images, adjust as needed */
   object-fit: cover;
   margin-right: 10px;
   margin-bottom: 10px;
