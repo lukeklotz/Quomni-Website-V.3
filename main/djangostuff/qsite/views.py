@@ -70,33 +70,29 @@ class ProductLandingPageView(TemplateView):
 @method_decorator(csrf_exempt, name='dispatch')
 class CreateCheckoutSessionView(View):
     def post(self, request, *args, **kwargs):
-        stripe.api_key = settings.STRIPE_SECRET_KEY
-        
-        # Get item_ids from cookieCart
+        stripe.api_key = settings.STRIPE_RESTRICTED_KEY  # Ensure you're using the SECRET key
+
         orderTotals = cookieCart(request)
-        items = orderTotals['items']  # The 'items' list containing product data
-        
+        items = orderTotals['items']
+
         YOUR_DOMAIN = 'http://127.0.0.1:8000/'
         line_items = []
 
-        # Create line items for each item in the 'items' list
         for item in items:
             line_items.append({
-                'price': item['product']['item_id'],  # Assuming item_id is the Price ID
+                'price': item['product']['item_id'],  # Ensure it's a valid Stripe Price ID
                 'quantity': item['quantity'],
             })
         
-        # Create checkout session with multiple line items
+        # Create checkout session
         checkout_session = stripe.checkout.Session.create(
             line_items=line_items,
             mode='payment',
-            success_url=YOUR_DOMAIN + '/paymentCompleted.html',
-            cancel_url=YOUR_DOMAIN + '/paymentFailed.html',
+            success_url=YOUR_DOMAIN + 'paymentCompleted.html',
+            cancel_url=YOUR_DOMAIN + 'paymentFailed.html',
             automatic_tax={'enabled': True},
-            billing_address_collection='required',  # Set to 'required' to collect billing address
-            shipping_address_collection={
-                'allowed_countries': ['US'],  # Specify the countries for which you want to collect shipping address
-            },
+            billing_address_collection='required',
+            shipping_address_collection={'allowed_countries': ['US']},
         )
         
         return redirect(checkout_session.url)
